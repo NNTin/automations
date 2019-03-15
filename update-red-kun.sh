@@ -6,7 +6,9 @@ for branch in $(git for-each-ref --format='%(refname)' | grep -P 'refs/remotes/o
     branch=${branch/refs\/remotes\/origin\//""}
     echo $branch
     git checkout $branch
-    source subtreeRemote  # SUBTREE_REPOSITORY="" SUBTREE_BRANCH=""
-    git subtree pull --prefix=cogs --squash --message="$COMMIT_MESSAGE" $SUBTREE_REPOSITORY $SUBTREE_BRANCH
+    . ~/red-kun/subtreeRemote
+    echo $COGS_REPOSITORY
+    echo $COGS_BRANCH
+    git subtree pull --prefix=cogs --squash --message="$COMMIT_MESSAGE" $COGS_REPOSITORY $COGS_BRANCH
     git push origin HEAD
 done
